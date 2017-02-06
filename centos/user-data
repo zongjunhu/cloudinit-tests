@@ -56,6 +56,9 @@ packages:
   - openssl-devel
   - python2-pip
 
+runcmd:
+  - [pip, install, ansible]
+
 ssh_authorized_keys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQColrjdCfF5IJlULbvoAtF/LD29k8M8bJnZQtaRrDkwV9uQVJxz//eUPxMWHRjDsJOs9vx/Oty3yfaHmrxT7muLNl9q2aD5cZSigZhRVxbotkzK+fIPOCxkpoULMK7q+Q5R6KXXyjIGcYnGnlgVMrnVDS+SfqV5zBfmnG2NYHhkRR0Z3OtPt7GiVKjEs4pzGcXB2CtyEi16cmT+TG+adQ3J8SJpNQc2uevggriNvBS8hruhqNA/0qQHAxXi203OKiwHIOhmOhVn/nZvCUtQvYr+97p82FdyQjBzffsb2Y9BL3Y/x5JAvprbpLvWcNVs4ZAcGnhuLXIyAbpqJHGmNymb zhu@hp-elite-8100
 #  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyFKJC8WujIVDCRS1IhlSn03yqMlmj85QWyaJDzHhDMUnF0Ul+lqd7XEUtMw1YNcCcTZKmh2i1g7ssTBx0GPwNrMqSFzal2/p47Bzak1CxpoRODCmhuJCHf12ZqcYb85LD4dd62+Z+0S1Ovuz6Xkk2xMTAGqcw9LG+XxdioGnTfkXcrJQgY6toGte05T0/nn3GPd098Xw4LN1I1chlSlliAz1XpFWXESFX6PttUbWML+OWl28bj7dkZWbBrZi6Hb7EuMUombafkBny7XT4x+0qB9a0fqvygzNWljMnSB2eG4ERoBQneaCMqYAB5lT0pAoVLu+7RNUF3kClkjemNqJZ zhu@hp-elite
