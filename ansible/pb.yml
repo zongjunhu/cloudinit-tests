@@ -1,0 +1,10 @@
+- hosts: localhost
+
+  tasks:
+
+    - name: Install Httpd Package
+      yum: name=httpd state=latest
+
+    - name: Start Httpd Service 
+      service: name=httpd state=started
+
