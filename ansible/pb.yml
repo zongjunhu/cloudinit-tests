@@ -1,4 +1,4 @@
-- hosts: default
+- hosts: master
 
   tasks:
 
@@ -10,3 +10,10 @@
       service: name=httpd state=started
       sudo: yes
 
+- hosts: client
+
+  tasks:
+
+    - name: Install Vim
+      yum: name=emacs state=latest
+      sudo: yes

@@ -16,14 +16,25 @@ Vagrant.configure(2) do |config|
 
   config.vm.hostname = 'test-server'
 
-  config.vm.network :private_network, ip: "192.168.1.20"
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = 2048
-    vb.cpus = 2
-    vb.name = 't2'
-    vb.linked_clone = true
+  config.vm.define "master" do | master |
+      master.vm.network :private_network, ip: "192.168.1.20"
+      master.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 2
+        vb.name = 'master'
+        vb.linked_clone = true
+      end
   end
 
+  config.vm.define "client" do | client |
+      client.vm.network :private_network, ip: "192.168.1.20"
+      client.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 2
+        vb.name = 'client'
+        vb.linked_clone = true
+      end
+  end
 
   config.vm.provision "ansible" do | ansible |
     #ansible.inventory_path = "hosts"
