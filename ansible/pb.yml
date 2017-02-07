@@ -1,10 +1,12 @@
-- hosts: localhost
+- hosts: test-server
 
   tasks:
 
     - name: Install Httpd Package
       yum: name=httpd state=latest
+      sudo: yes
 
     - name: Start Httpd Service 
       service: name=httpd state=started
+      sudo: yes
 
