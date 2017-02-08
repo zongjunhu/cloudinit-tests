@@ -1,40 +1,26 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
-Vagrant.configure(2) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
+require_relative 'cluster_config'
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
+Vagrant.configure(2) do |config|
+
   config.vm.box = "bento/centos-7.1"
 
   config.vm.hostname = 'test-server'
 
-  config.vm.define "master" do | master |
-      master.vm.network :private_network, ip: "192.168.1.20"
-      master.vm.provider "virtualbox" do |vb|
-        vb.memory = 2048
-        vb.cpus = 2
-        vb.name = 'master'
-        vb.linked_clone = true
+  @slurm_cluster.each_pair do | name, conf |
+      config.vm.define name do | h |
+          h.vm.network :private_network, ip: conf[:ipaddress]
+          h.vm.hostname = "#{name}"
+          h.vm.provider "virtualbox" do |vb|
+            vb.memory = 2048
+            vb.cpus = 2
+            vb.name = "#{name}"
+            vb.linked_clone = true
+          end
       end
-  end
-
-  config.vm.define "client" do | client |
-      client.vm.network :private_network, ip: "192.168.1.21"
-      client.vm.provider "virtualbox" do |vb|
-        vb.memory = 2048
-        vb.cpus = 2
-        vb.name = 'client'
-        vb.linked_clone = true
-      end
-  end
+    end
 
   config.vm.provision "ansible" do | ansible |
     #ansible.inventory_path = "hosts"

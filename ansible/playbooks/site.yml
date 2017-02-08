@@ -1,11 +1,8 @@
 - hosts: master
-
   roles:
     - web
     - munge
 
-- hosts: client
-
+- hosts: c01:c02:c03
   roles:
-
     - munge
