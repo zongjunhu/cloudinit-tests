@@ -1,26 +1,45 @@
-  - name: install list of packages
-    yum: name={{item}} state=installed
-    with_items:
-      - openssl-devel
-      - gcc
-      - unzip
+- name: install list of packages
+  yum: name={{item}} state=installed
+  with_items:
+    - openssl-devel
+    - gcc
+    - unzip
 
-  - copy: 
-      src: munge-munge-0.5.12.zip
-      dest: /tmp/munge-munge-0.5.12.zip
+- copy: 
+    src: munge-munge-0.5.12.zip
+    dest: /tmp/munge-munge-0.5.12.zip
 
-  - script: install_munge.sh
-    args:
-      creates: /etc/init.d/munge
+- script: install_munge.sh
+  args:
+    creates: /etc/init.d/munge
 
-  - copy:
-      src: munge.key
-      dest: /etc/munge/munge.key
-      owner: munge
-      group: munge
-      mode: 0400
+- copy:
+    src: munge.key
+    dest: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: 0400
 
-  - name: start munge service
-    service: name=munge state=started enabled=true
+- name: start munge service
+  service: name=munge state=started enabled=true
 
+- name: create test user group
+  group: name=testusers gid=1010
+
+- name: create test user
+  user: name=testuser uid=1010 group=testusers 
         
+- name: create user ssh folder
+  file: path=/home/testuser/.ssh state=directory mode=0700 owner=testuser group=testusers
+
+- copy: src={{ item }} dest=/home/testuser/.ssh/ owner=testuser group=testusers mode=0600
+  with_fileglob: 
+    - id_rsa*
+
+- copy:
+    src: id_rsa.pub
+    dest: /home/testuser/.ssh/authorized_keys
+    owner: testuser
+    group: testusers
+    mode: 0600
+
