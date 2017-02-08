@@ -1,0 +1,11 @@
+- hosts: master
+
+  roles:
+    - web
+    - munge
+
+- hosts: client
+
+  roles:
+
+    - munge
