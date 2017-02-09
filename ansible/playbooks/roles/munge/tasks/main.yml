@@ -43,3 +43,10 @@
     group: testusers
     mode: 0600
 
+- copy:
+    src: config
+    dest: /home/testuser/.ssh/config
+    owner: testuser
+    group: testusers
+    mode: 0644
+
