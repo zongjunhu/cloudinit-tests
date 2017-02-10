@@ -1,8 +1,8 @@
 - name: create test user group
-  group: name=testusers gid=1010
+  group: name={{group}} gid={{groupid}}
 
 - name: create test user
-  user: name=testuser uid=1010 group=testusers home=/shared/testuser createhome=no
+  user: name={{user}} uid={{userid}} group={{group}} home={{nfsdir}}/{{user}} createhome=no
 
 - include: config.yml
   when: ansible_hostname == "master"

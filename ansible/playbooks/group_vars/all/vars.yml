@@ -1,0 +1,5 @@
+user: testuser
+group: testusers
+userid: 1010
+groupid: 1010
+nfsdir: /shared

@@ -1,23 +1,23 @@
 - name: create user home
-  file: path=/shared/testuser state=directory mode=0755 owner=testuser group=testusers
+  file: path={{nfsdir}}/{{user}} state=directory mode=0755 owner={{user}} group={{group}}
 
 - name: create user ssh folder
-  file: path=/shared/testuser/.ssh state=directory mode=0700 owner=testuser group=testusers
+  file: path={{nfsdir}}/{{user}}/.ssh state=directory mode=0700 owner={{user}} group={{group}}
 
-- copy: src={{ item }} dest=/shared/testuser/.ssh/ owner=testuser group=testusers mode=0600
+- copy: src={{ item }} dest={{nfsdir}}/{{user}}/.ssh/ owner={{user}} group={{group}} mode=0600
   with_fileglob: 
     - id_rsa*
 
 - copy:
     src: id_rsa.pub
-    dest: /shared/testuser/.ssh/authorized_keys
-    owner: testuser
-    group: testusers
+    dest: "{{nfsdir}}/{{user}}/.ssh/authorized_keys"
+    owner: "{{user}}"
+    group: "{{group}}"
     mode: 0600
 
 - copy:
     src: config
-    dest: /shared/testuser/.ssh/config
-    owner: testuser
-    group: testusers
+    dest: "{{nfsdir}}/{{user}}/.ssh/config"
+    owner: "{{user}}"
+    group: "{{group}}"
     mode: 0644
