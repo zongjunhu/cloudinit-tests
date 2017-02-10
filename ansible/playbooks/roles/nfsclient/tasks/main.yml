@@ -1,0 +1,8 @@
+- name: install nfs packages
+  package: name=nfs-utils state=installed
+
+- name: create nfs folder
+  file: name={{nfsdir}} state=directory owner=root group=root
+
+- name: mount nfs share
+  mount: name={{nfsdir}} src=master:{{nfsdir}} fstype=nfs state=mounted

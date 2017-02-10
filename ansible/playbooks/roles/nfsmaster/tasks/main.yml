@@ -1,0 +1,11 @@
+  - name: install nfs packages
+    package: name=nfs-utils state=installed
+  
+  - name: create nfs directory
+    file: name={{nfsdir}} state=directory owner=root group=root
+  
+  - name: nfs exports
+    template: src=exports.j2 dest=/etc/exports owner=root group=root
+  
+  - name: nfs service
+    service: name=nfs-server enabled=yes state=started

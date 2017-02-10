@@ -1,8 +1,11 @@
 - hosts: master
   roles:
-    - web
+    - nfsmaster
+    - testuser
     - munge
 
 - hosts: c01:c02:c03
   roles:
+    - nfsclient
+    - testuser
     - munge

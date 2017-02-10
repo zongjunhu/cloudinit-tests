@@ -1,0 +1,23 @@
+- name: create user home
+  file: path=/shared/testuser state=directory mode=0755 owner=testuser group=testusers
+
+- name: create user ssh folder
+  file: path=/shared/testuser/.ssh state=directory mode=0700 owner=testuser group=testusers
+
+- copy: src={{ item }} dest=/shared/testuser/.ssh/ owner=testuser group=testusers mode=0600
+  with_fileglob: 
+    - id_rsa*
+
+- copy:
+    src: id_rsa.pub
+    dest: /shared/testuser/.ssh/authorized_keys
+    owner: testuser
+    group: testusers
+    mode: 0600
+
+- copy:
+    src: config
+    dest: /shared/testuser/.ssh/config
+    owner: testuser
+    group: testusers
+    mode: 0644
