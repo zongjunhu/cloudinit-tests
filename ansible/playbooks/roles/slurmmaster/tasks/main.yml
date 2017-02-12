@@ -1,0 +1,16 @@
+- name: copy slrum source code
+  copy: src=slurm-16.05.9.tar.bz2 dest=/tmp/slurm-16.05.9.tar.bz2
+
+- name: slurm user
+  include_role: name=slurm
+
+- name: install pkg dependency
+  package: name=perl state=installed
+
+- name: install slurm
+  script: install_slurm.sh {{nfsdir}} {{slurmuser.user}}
+  args:
+    creates: "{{nfsdir}}/slurm/sbin/slurmctld" 
+
+- name: install slurm conf
+  copy: src=slurm.conf dest={{nfsdir}}/slurm/etc/slurm.conf

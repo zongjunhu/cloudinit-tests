@@ -3,7 +3,6 @@ cd /tmp
 unzip munge-munge-0.5.12.zip 
 cd munge-munge-0.5.12
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
 make
 sudo make install
 sudo mv /usr/lib/libmung* /usr/lib64/

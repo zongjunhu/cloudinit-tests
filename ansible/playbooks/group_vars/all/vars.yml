@@ -3,3 +3,8 @@ group: testusers
 userid: 1010
 groupid: 1010
 nfsdir: /shared
+slurmuser:
+  user: slurm
+  group: slurm
+  uid: 1200
+  gid: 1200

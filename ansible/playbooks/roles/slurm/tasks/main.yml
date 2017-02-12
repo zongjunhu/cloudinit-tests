@@ -1,0 +1,5 @@
+- name: create slurm group
+  group: name={{slurmuser.group}} gid={{slurmuser.gid}}
+
+- name: create slurm user
+  user: name={{slurmuser.user}} uid={{slurmuser.uid}} group={{slurmuser.group}} createhome=no 
