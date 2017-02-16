@@ -1,0 +1,6 @@
+- name: install openmpi
+  include: openmpi.yml openmpi_ver=openmpi-2.0.2
+  when: ansible_hostname == 'master'
+
+- name: configure openmpi env
+  template: src=openmpi.sh dest=/etc/profile.d/openmpi.sh

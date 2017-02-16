@@ -3,3 +3,6 @@
 
 - name: create slurm user
   user: name={{slurmuser.user}} uid={{slurmuser.uid}} group={{slurmuser.group}} createhome=no 
+
+- name: configure slurm path
+  template: src=slurm.profile.sh dest=/etc/profile.d/slurm.sh

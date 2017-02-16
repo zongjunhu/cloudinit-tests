@@ -1,0 +1,33 @@
+- name: install g++
+  package: name=gcc-c++ state=installed
+
+- name: download openmpi source
+  get_url: 
+    url: https://www.open-mpi.org/software/ompi/v2.0/downloads/{{openmpi_ver}}.tar.gz
+    dest: /tmp/{{openmpi_ver}}.tar.gz 
+    validate_certs: no
+
+- unarchive:
+    src: /tmp/{{openmpi_ver}}.tar.gz
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/{{openmpi_ver}}
+
+- name: configure openmpi
+  command: ./configure --with-slurm --prefix={{nfsdir}}/openmpi
+  args:
+    chdir: /tmp/{{openmpi_ver}}
+    creates: /tmp/{{openmpi_ver}}/Makefile
+
+- name: compile openmpi
+  command: make
+  args:
+    chdir: /tmp/{{openmpi_ver}}
+    creates: /tmp/{{openmpi_ver}}/orte/orted/orted_main.lo
+
+- name: install openmpi
+  command: make install
+  args:
+    chdir: /tmp/{{openmpi_ver}}
+    creates: "{{nfsdir}}/openmpi/bin/mpicc"
+

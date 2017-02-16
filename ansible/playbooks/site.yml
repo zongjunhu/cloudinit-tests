@@ -4,6 +4,7 @@
     - testuser
     - munge
     - slurmmaster
+    - openmpi
 
 - hosts: c01:c02:c03
   roles:
@@ -11,3 +12,4 @@
     - testuser
     - munge
     - slurm
+    - openmpi
