@@ -1,15 +1,33 @@
-# Ansible Samples
+# Slurm Cluster Automated by Ansible
 
-Here are a few examples used in cloud-init testing. 
-
-* `hosts` is list of test hosts managed by `ansible`. 
-* `pb.yml` is a simple ansible playbook to install and start httpd service in CentOS
-
-To run this example in CentOS virtual machine, run the followings as root.
-
-```bash
-$ ssh-keygen
-$ cat .ssh/id_rsa.pub >> .ssh/authorized_keys
-$ ssh localhost
-$ ansible-playbook -i hosts pb.yml
+## Check vm list and status
 ```
+vagrant status
+```
+## Start Cluster
+```
+vagrant master c01 c02 c03
+```
+or bring up virtual machines one by one.
+```
+vagrant up master
+...
+vagrant up c03
+```
+
+## Provision virtual machine
+```
+vagrant up master
+...
+vagrant up c03
+```
+
+## Login virtual machine
+```
+vagrant ssh master
+```
+`master` is the head node of the cluster. There is a test user account called `testuser`. 
+```
+sudo su - testuser
+```
+Its home directory, `/shared/testuser`, is exported from master to all compute nodes through nfs. 
