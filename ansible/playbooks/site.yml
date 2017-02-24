@@ -5,6 +5,7 @@
     - munge
     - slurmmaster
     - openmpi
+    - singularity
 
 - hosts: c01:c02:c03
   roles:
@@ -13,3 +14,4 @@
     - munge
     - slurm
     - openmpi
+    - singularity

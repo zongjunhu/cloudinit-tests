@@ -22,7 +22,7 @@ Include: yum
 	git clone https://github.com/open-mpi/ompi.git
 	cd ompi
 	./autogen.pl
-	./configure --prefix=/usr/local
+	./configure --prefix=/usr/local --with-slurm
 	make
 	make install
 	/usr/local/bin/mpicc examples/ring_c.c -o /usr/bin/mpi_ring

@@ -1,0 +1,38 @@
+- name: install dependency
+  package: name={{item}} state=installed
+  with_items:
+    - git
+    - automake
+    - autoconf
+    - libtool
+
+- name: clone singularity
+  git:
+    repo: https://github.com/singularityware/singularity.git
+    dest: /tmp/singularity
+
+- name: create config
+  command: ./autogen.sh
+  args:
+    chdir: /tmp/singularity
+    creates: /tmp/singularity/configure
+
+- name: configure singularity
+  command: ./configure --prefix=/usr/local --sysconfdir=/etc 
+  args:
+    chdir: /tmp/singularity
+    creates: /tmp/singularity/Makefile
+
+- name: compile singularity
+  command: make
+  args:
+    chdir: /tmp/singularity
+    creates: /tmp/singularity/etc/singularity.conf
+
+- name: install singularity
+  command: make install
+  args:
+    chdir: /tmp/singularity
+    creates: /usr/local/bin/singularity
+
+
